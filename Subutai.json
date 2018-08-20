@@ -4,7 +4,7 @@
     "description": "Blockchain II",
     "version": "0.0.1",
     "author": "https://github.com/lbthomsen",
-    "ssh-key": "lth",
+    "ssh-key": "root",
     "containers": [
         {
             "hostname": "bs0",
