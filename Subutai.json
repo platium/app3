@@ -10,15 +10,15 @@
             "hostname": "bs0",
             "template": "debian-stretch",
             "peer-criteria": "peers",
-            "size": "LARGE"
+            "size": "LARGE",
+            "peer-layout": "mm"
         },
         {
             "hostname": "bc",
             "template": "debian-stretch",
             "peer-criteria": "peers",
             "peer-layout": "bc",
-            "size": "LARGE",
-            "peer-layout": "mm"
+            "size": "LARGE"
         },
         {
             "hostname": "m",
