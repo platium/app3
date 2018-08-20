@@ -10,8 +10,7 @@
             "hostname": "bs0",
             "template": "debian-stretch",
             "peer-criteria": "peers",
-            "size": "LARGE",
-            "peer-layout": "mm"
+            "size": "LARGE"
         },
         {
             "hostname": "bc",
