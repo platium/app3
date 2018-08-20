@@ -1,3 +1,4 @@
+
 {
     "name": "${environmentName}",
     "description": "Blockchain II",
@@ -6,17 +7,17 @@
     "ssh-key": "lth",
     "containers": [
         {
-            "hostname": "bs7",
+            "hostname": "bs0",
             "template": "debian-stretch",
             "peer-criteria": "peers",
             "size": "LARGE",
-            "peer-layout": "bcs"
+            "peer-layout": "mm"
         },
         {
             "hostname": "bc",
             "template": "debian-stretch",
             "peer-criteria": "peers",
-            "peer-layout": "bcs",
+            "peer-layout": "bc",
             "size": "LARGE"
         },
         {
@@ -34,7 +35,7 @@
     ],
     "peer-layouts": [
         {
-            "name": "bcs",
+            "name": "bc",
             "peer-count": "${numberOfNodes}",
             "container-per-peer": "1"
         },
@@ -43,28 +44,33 @@
             "peer-count": "${numberOfMiners}",
             "container-per-peer": "1"
         }
+        ,
+        {
+            "name": "mm",
+            "peer-count": "${numberOfMiners}",
+            "container-per-peer": "1"
+        }
     ],
     "ansible-configuration": {
         "source-url": "https://github.com/lbthomsen/subutai-bp-blockchain2/archive/master.zip",
         "ansible-playbook": "site.yml",
         "groups": [
-            
             {
-                "name": "bs3",
+                "name": "bs",
                 "hostnames": [
-                    "bs7"
-                ]
-            },
-            {
-                "name": "m",
-                "hostnames": [
-                    "m"
+                    "bs0"
                 ]
             },
             {
                 "name": "bc",
                 "hostnames": [
                     "bc"
+                ]
+            },
+            {
+                "name": "m",
+                "hostnames": [
+                    "m"
                 ]
             }
         ]
