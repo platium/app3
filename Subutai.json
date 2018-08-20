@@ -58,12 +58,6 @@
                 "hostnames": [
                     "bc"
                 ]
-            },
-            {
-                "name": "m",
-                "hostnames": [
-                    "m"
-                ]
             }
         ]
     },
