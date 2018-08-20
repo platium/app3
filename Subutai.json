@@ -6,7 +6,7 @@
     "ssh-key": "lth",
     "containers": [
         {
-            "hostname": "bs0",
+            "hostname": "bs7",
             "template": "debian-stretch",
             "peer-criteria": "peers",
             "size": "LARGE"
@@ -48,7 +48,12 @@
         "ansible-playbook": "site.yml",
         "groups": [
             
-            
+            {
+                "name": "bs3",
+                "hostnames": [
+                    "bs7"
+                ]
+            },
             {
                 "name": "m",
                 "hostnames": [
