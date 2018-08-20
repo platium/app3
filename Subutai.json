@@ -47,6 +47,24 @@
         "source-url": "https://github.com/lbthomsen/subutai-bp-blockchain2/archive/master.zip",
         "ansible-playbook": "site.yml",
         "groups": [
+            {
+                "name": "bs",
+                "hostnames": [
+                    "bs0"
+                ]
+            },
+            {
+                "name": "bc",
+                "hostnames": [
+                    "bc"
+                ]
+            },
+            {
+                "name": "m",
+                "hostnames": [
+                    "m"
+                ]
+            }
         ]
     },
     "user-variables": {
