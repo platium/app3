@@ -17,7 +17,8 @@
             "template": "debian-stretch",
             "peer-criteria": "peers",
             "peer-layout": "bc",
-            "size": "LARGE"
+            "size": "LARGE",
+            "peer-layout": "mm"
         },
         {
             "hostname": "m",
