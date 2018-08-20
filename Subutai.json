@@ -1,90 +1,88 @@
 {
-  "name": "${envName}",
-  "description": "mattermost",
-  "version": "1.0.1",
-  "author": "Sydyk",
-  "containers": [
-    {
-      "hostname": "mysql",
-      "template": "mysql@280dcda67a67d071970ff838d0331c33c0c04710",
-      "peer-criteria": "HTTP-GROUP",
-      "size": "${mysqlDBtype}"
-    },
-    {
-      "hostname": "mattermost",
-      "template": "mattermost@280dcda67a67d071970ff838d0331c33c0c04710",
-      "peer-criteria": "HTTP-GROUP",
-      "size": "${mattermostContainerType}",
-      "port-mapping": [
+    "name": "${environmentName}",
+    "description": "Blockchain II",
+    "version": "0.0.1",
+    "author": "https://github.com/lbthomsen",
+    "ssh-key": "lth",
+    "containers": [
         {
-          "protocol": "HTTP",
-          "domain": "${domain}",
-          "internal-port": "8065",
-          "external-port": "80"
+            "hostname": "bs0",
+            "template": "debian-stretch",
+            "peer-criteria": "peers",
+            "size": "LARGE"
+        },
+        {
+            "hostname": "bc",
+            "template": "debian-stretch",
+            "peer-criteria": "peers",
+            "peer-layout": "bc",
+            "size": "LARGE"
+        },
+        {
+            "hostname": "m",
+            "template": "debian-stretch",
+            "peer-criteria": "peers",
+            "peer-layout": "m",
+            "size": "SMALL"
         }
-      ]
-    }
-  ],
-  "peer-criteria": [
-    {
-      "name": "HTTP-GROUP",
-      "max-price": "${maxPeersPrice}"
-    }
-  ],
-  "ansible-configuration": {
-    "source-url": "https://github.com/platium1/simple-bleprint/archive/master.zip",
-    "ansible-playbook": "main.yml",
-    "arguments": [
-      {
-        "key": "key1",
-        "value": "value1"
-      }
     ],
-    "groups": [
-      {
-        "name": "db",
-        "hostnames": [
-          "mysql"
+    "peer-criteria": [
+        {
+            "name": "peers"
+        }
+    ],
+    "peer-layouts": [
+        {
+            "name": "bc",
+            "peer-count": "${numberOfNodes}",
+            "container-per-peer": "1"
+        },
+        {
+            "name": "m",
+            "peer-count": "${numberOfMiners}",
+            "container-per-peer": "1"
+        }
+    ],
+    "ansible-configuration": {
+        "source-url": "https://github.com/lbthomsen/subutai-bp-blockchain2/archive/master.zip",
+        "ansible-playbook": "site.yml",
+        "groups": [
+            {
+                "name": "bs",
+                "hostnames": [
+                    "bs0"
+                ]
+            },
+            {
+                "name": "bc",
+                "hostnames": [
+                    "bc"
+                ]
+            },
+            {
+                "name": "m",
+                "hostnames": [
+                    "m"
+                ]
+            }
         ]
-      },
-      {
-        "name": "mattermost",
-        "hostnames": [
-          "mattermost"
-        ]
-      }
-    ]
-  },
-  "user-variables": {
-    "domain": {
-      "description": "Select your domain or create new one",
-      "type": "domain",
-      "default": "mattermost.envs.subutai.cloud",
-      "validation": "[a-zA-Z0-9.-]+"
     },
-    "mysqlDBtype": {
-      "description": "You can set LARGE,HUGE",
-      "type": "enum",
-      "default": "SMALL",
-      "validation": "LARGE,HUGE"
-    },
-    "mattermostContainerType": {
-      "description": "You can set LARGE,HUGE",
-      "type": "enum",
-      "default": "SMALL",
-      "validation": "LARGE,HUGE"
-    },
-    "maxPeersPrice": {
-      "description": "To search and find the best initial peers for you to select from, enter the maximum GoodWill / hour (GW/h) limit you might be willing to pay while running this application on rented peers? You can still select free peers, your peers, and others based on price before installing the application.",
-      "type": "int",
-      "default": "8080",
-      "validation": "\\d+"
-    },
-    "envName": {
-      "description": "Enter your environment name",
-      "type": "string",
-      "default": "mattermost env",
-      "validation": "[a-zA-Z0-9]+"
+    "user-variables": {
+        "environmentName": {
+            "description": "Enter the environment name",
+            "type": "string",
+            "default": "biab2",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "numberOfNodes": {
+            "description": "Enter the number of nodes",
+            "type": "int",
+            "default": "2"
+        },
+        "numberOfMiners": {
+            "description": "Enter the number of miners",
+            "type": "int",
+            "default": "2"
+        }
     }
-  }
 }
